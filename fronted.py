@@ -17,7 +17,7 @@ if page == "Home":
         Use the **Prediction** page to enter insurance claim details and check if a claim is **Fraudulent** or **Not Fraudulent**.
     """)
 
-    st.image("Enterprise_Security.jpg", use_container_width=True)
+    st.image("image/Enterprise_Security.jpg", use_container_width=True)
 
 elif page == "Prediction":
     st.title(" Predict Insurance Fraud")
@@ -62,12 +62,12 @@ elif page == "Prediction":
                 if prediction == "Fraud":
                     st.error(f"Prediction: {prediction}")
                     
-                    fraud_image = Image.open("imaa.jpg") 
+                    fraud_image = Image.open("image/imaa.jpg") 
                     st.image(fraud_image, caption=" Fraud Alert!", use_column_width=True)
                 else:
                     st.success(f"Prediction: {prediction}")
 
-                    fraud_image = Image.open("nofraud.jpg") 
+                    fraud_image = Image.open("image/nofraud.jpg") 
                     st.image(fraud_image, caption=" No Fraud Detected",width=200)
             else:
                 st.warning("Error from API: " + response.text)

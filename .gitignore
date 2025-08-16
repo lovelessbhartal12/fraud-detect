@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# --- Virtual Environments ---
+venv/
+env/
+myenv/
+.envenv/
+ENV/
+.venv/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Jupyter / IPython ---
+.ipynb_checkpoints/
+*.ipynb~
+
+# --- Data files (optional: ignore raw datasets if they’re large) ---
+data/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.json
+
+# --- Machine Learning Artifacts ---
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# --- Streamlit cache ---
+.streamlit/
+.streamlit_cache/

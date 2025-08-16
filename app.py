@@ -4,28 +4,25 @@ from typing import List, Optional, Annotated
 from fastapi.responses import JSONResponse
 import pickle
 import pandas as pd
+from schema.user_input import ClaimData
+model = pickle.load(open('model/model.pkl', 'rb'))
+scaler = pickle.load(open('model/scaler.pkl', 'rb'))
+pca = pickle.load(open('model/pca.pkl', 'rb'))
+features = pickle.load(open('model/features.pkl', 'rb'))
 
-model = pickle.load(open('model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
-pca = pickle.load(open('pca.pkl', 'rb'))
-features = pickle.load(open('features.pkl', 'rb'))
-
+model_version = "1.0.0"
 app = FastAPI()
 
-class ClaimData(BaseModel):
-    AddressChange_Claim: Annotated[int, Field(..., description="Address change during claim")]
-    BasePolicy: int
-    VehiclePrice: float
-    Deductible: float
-    Fault: int
-    PolicyNumber: float
-    PastNumberOfClaims: float
-@app.get("/about")
-def about():
-    return 
-{"message":"THIS IS THE FRAUD DETECTION"
- ,"version":"1.0.0","description":"A simple API for detecting fraudulent claims"}
-
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Fraud Detection API."}
+@app.get("/health")
+def health_check():
+    return {"status": "ok",
+            "version": model_version,
+            "description": "Fraud Detection API is running.",
+            "model_loaded": model is not None
+            }
 
 @app.post("/predict")
 def predict(data: ClaimData):
