@@ -2,41 +2,25 @@ import streamlit as st
 import requests
 from PIL import Image
 
-# ---------------------------
-# CONFIG: Choose API URL
-# ---------------------------
-# Set USE_LOCAL = True if testing locally with your local FastAPI
-# Set USE_LOCAL = False when deploying to Streamlit Cloud
-USE_LOCAL = False
+API_URL = "https://fraud-detect-35nr.onrender.com"
 
-if USE_LOCAL:
-    BASE_URL = "http://127.0.0.1:8000"
-else:
-    BASE_URL = "https://fraud-detect-35nr.onrender.com"  # your deployed Render API
 
-# ---------------------------
-# STREAMLIT APP CONFIG
-# ---------------------------
 st.set_page_config(page_title="Fraud Detection", layout="centered")
+
 
 page = st.sidebar.selectbox("Select Page", ["Home", "Prediction"])
 
-# ---------------------------
-# HOME PAGE
-# ---------------------------
 if page == "Home":
     st.title("Fraud Detection App")
     st.markdown("""
         Welcome to the Fraud Detection App.  
         Use the **Prediction** page to enter insurance claim details and check if a claim is **Fraudulent** or **Not Fraudulent**.
     """)
+
     st.image("image/Enterprise_Security.jpg", use_container_width=True)
 
-# ---------------------------
-# PREDICTION PAGE
-# ---------------------------
 elif page == "Prediction":
-    st.title("Predict Insurance Fraud")
+    st.title(" Predict Insurance Fraud")
     st.markdown("Enter the claim details below:")
 
     with st.form(key='claim_form'):
@@ -45,11 +29,13 @@ elif page == "Prediction":
             options=[0, 1],
             format_func=lambda x: "No" if x == 0 else "Yes"
         )
+        
         BasePolicy = st.selectbox(
             "Base Policy Type",
             options=[0, 1, 2],
             format_func=lambda x: ["Type A", "Type B", "Type C"][x]
         )
+        
         VehiclePrice = st.slider("Vehicle Price", 0.0, 100000.0, 20000.0, 500.0)
         Deductible = st.slider("Deductible", 0.0, 5000.0, 500.0, 100.0)
         Fault = st.radio("Was the policyholder at Fault?", [0, 1], format_func=lambda x: "No" if x==0 else "Yes")
@@ -70,18 +56,19 @@ elif page == "Prediction":
         }
 
         try:
-            # Call the FastAPI /predict endpoint
-            response = requests.post(f"{BASE_URL}/predict", json=payload)
+            response = requests.post(f"{API_URL}/predict", json=payload)
             if response.status_code == 200:
                 prediction = response.json()["prediction"]
                 if prediction == "Fraud":
                     st.error(f"Prediction: {prediction}")
+                    
                     fraud_image = Image.open("image/imaa.jpg") 
                     st.image(fraud_image, caption=" Fraud Alert!", use_column_width=True)
                 else:
                     st.success(f"Prediction: {prediction}")
+
                     fraud_image = Image.open("image/nofraud.jpg") 
-                    st.image(fraud_image, caption=" No Fraud Detected", width=200)
+                    st.image(fraud_image, caption=" No Fraud Detected",width=200)
             else:
                 st.warning("Error from API: " + response.text)
         except Exception as e:

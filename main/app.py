@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import List, Optional, Annotated
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import pickle
 import pandas as pd
 from schema.user_input import ClaimData
@@ -12,6 +13,14 @@ features = pickle.load(open('model/features.pkl', 'rb'))
 
 model_version = "1.0.0"
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["https://your-streamlit-app-url"] for security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
