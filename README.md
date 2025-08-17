@@ -3,7 +3,7 @@
 A **Machine Learning + FastAPI + Streamlit** based project to detect fraudulent car insurance claims.  
 The goal is to help insurance companies quickly identify suspicious claims and reduce financial losses caused by fraud.  
 
-🔗 Try Here: 
+🔗 Try Here: https://fraud-detect-sqqzns3c5sk752qbfsmjcw.streamlit.app/
 ---
 
 ## 📌 Features
