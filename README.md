@@ -91,5 +91,16 @@ Displays results with labels: Fraudulent Claim / Not Fraudulent
  - **Evaluation Metrics: Accuracy, Precision, Recall, F1-score**
    
 📸 Streamlit App Screenshot
- ![Streamlit App Screenshot]()
+ ![Streamlit App Screenshot](image/frauddeeee.PNG)
+ ![Streamlit App Screenshot](image/predict.PNG)
 
+📄 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+---
+
+## 👨‍💻 Made By
+
+This project was lovingly crafted by **Loblesh Bhartal** 💡🛠️✨  
+
+Thank you for checking out my work! 🚀🔥
